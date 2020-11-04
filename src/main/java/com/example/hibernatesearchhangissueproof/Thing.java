@@ -1,7 +1,8 @@
 package com.example.hibernatesearchhangissueproof;
 
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.engine.backend.types.Norms;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Thing {
     @NotNull
     @Size(min = 1, max = 255)
     @Column(nullable = false, unique = true)
-    @FullTextField(analyzer = "english_custom")
+    @KeywordField(norms = Norms.YES)
     String name;
 
 }

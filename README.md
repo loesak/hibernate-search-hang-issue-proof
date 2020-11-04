@@ -32,10 +32,18 @@ Elasticsearch cluster available at `localhost:9200`
 * The thing table gets created in PostgreSQL
 * The indexes **DO NOT** get created in Elasticsearch
 
+# Workarounds
+1. Add `spring.data.jpa.repositories.bootstrap_mode=default` to application configuration. This reverts a change made by Spring where the default value was `default` but is now `deferred`
+2. Add `@EnableJpaRepositories` annotation to `Application.java`. This may be equivalent to option 1 as the default value of `bootstrapMode` in the annotation is `BootstrapMode.DEFAULT`
+3. Add `@EnableJpaRepositories(bootstrapMode = BootstrapMode.DEFERRED)` annotation to `Application.java`. Not sure why this works but this sets `bootstrapMode` to `BootstrapMode.DEFAULT` which is the same value that was changed in the configuration properties that introduced this issue.
+
+# Related Issues
+* https://hibernate.atlassian.net/browse/HSEARCH-4096
+* https://github.com/spring-projects/spring-framework/issues/25111
+
 # Thread Dump
 ## Hibernate Search Disabled
 ```
-
 2020-11-03 21:55:36
 Full thread dump OpenJDK 64-Bit Server VM (11.0.9+11-Ubuntu-0ubuntu1.18.04.1 mixed mode, sharing):
 
@@ -847,8 +855,6 @@ _java_thread_list=0x00007f425c004a20, length=51, elements={
 "VM Periodic Task Thread" os_prio=0 cpu=5.74ms elapsed=11.20s tid=0x00007f43a0290800 nid=0x29fd waiting on condition  
 
 JNI global refs: 26, weak refs: 0
-
-
 ```
 
 ## Hibernate Search Enabled
@@ -1747,6 +1753,4 @@ _java_thread_list=0x00007fe268004ca0, length=50, elements={
 "VM Periodic Task Thread" os_prio=0 cpu=15.07ms elapsed=28.81s tid=0x00007fe3a8290800 nid=0x2613 waiting on condition  
 
 JNI global refs: 26, weak refs: 0
-
-
 ```

@@ -15,6 +15,8 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<!-- Hibernate Search Elasticsearch needs this version of the Elasticsearch client. Spring Boot defaults to 7.6.2 -->
+		<elasticsearch.version>7.9.0</elasticsearch.version>
 	</properties>
 
 	<dependencies>
