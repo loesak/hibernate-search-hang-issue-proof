@@ -1,0 +1,32 @@
+---
+spring:
+  application:
+    name: hibernate-search-hang-issue-proof
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        search:
+          enabled: false
+          default_backend: elasticsearch
+          backends:
+            elasticsearch:
+              hosts: http://localhost:9200
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hosc
+    username: hosc
+    password: password
+  elasticsearch:
+    rest:
+      uris: ${spring.jpa.properties.hibernate.search.backends.elasticsearch.hosts}
+
+logging:
+  level:
+    root: info
+    org.hibernate: trace
+
+server:
+  port: 65529
+
