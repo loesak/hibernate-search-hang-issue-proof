@@ -33,7 +33,7 @@ Elasticsearch cluster available at `localhost:9200`
 * The indexes **DO NOT** get created in Elasticsearch
 
 # Thread Dump
-# Hibernate Search Disabled
+## Hibernate Search Disabled
 ```
 
 2020-11-03 21:55:36
@@ -851,7 +851,7 @@ JNI global refs: 26, weak refs: 0
 
 ```
 
-# Hibernate Search Enabled
+## Hibernate Search Enabled
 ```
 2020-11-03 21:51:22
 Full thread dump OpenJDK 64-Bit Server VM (11.0.9+11-Ubuntu-0ubuntu1.18.04.1 mixed mode, sharing):
